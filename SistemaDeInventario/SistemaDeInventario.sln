@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeInventario", "SistemaDeInventario\SistemaDeInventario.csproj", "{5BA324CB-B670-4462-8BC3-806DFFB4B281}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeInventario", "SistemaDeInventario\SistemaDeInventario.csproj", "{58E88CDB-761B-432A-826E-0892ACC57E85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BA324CB-B670-4462-8BC3-806DFFB4B281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BA324CB-B670-4462-8BC3-806DFFB4B281}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BA324CB-B670-4462-8BC3-806DFFB4B281}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BA324CB-B670-4462-8BC3-806DFFB4B281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E88CDB-761B-432A-826E-0892ACC57E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E88CDB-761B-432A-826E-0892ACC57E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E88CDB-761B-432A-826E-0892ACC57E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E88CDB-761B-432A-826E-0892ACC57E85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CEBA0A7B-3B43-4878-8BE7-ADC78CF62970}
+		SolutionGuid = {251DA6E3-9CDE-438B-92CF-8EDF770C6723}
 	EndGlobalSection
 EndGlobal
