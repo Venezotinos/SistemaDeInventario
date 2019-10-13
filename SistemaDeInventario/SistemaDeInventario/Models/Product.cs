@@ -18,10 +18,8 @@ namespace SistemaDeInventario.Models
 
         public DateTime ExpirationDate { get; set; }
 
-        public DateTime BuyDate { get; set; }
+        public int CategoryID { get; set; }
 
-        public DateTime SellDate { get; set; }
-
-        public ICollection<ProductCategory> Categories { get; set; }
+        public Category Category { get; set; }
     }
 }
