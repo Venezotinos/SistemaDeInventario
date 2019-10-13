@@ -13,6 +13,6 @@ namespace SistemaDeInventario.Models
 
         public string Description { get; set; }
 
-        public ICollection<ProductCategory> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

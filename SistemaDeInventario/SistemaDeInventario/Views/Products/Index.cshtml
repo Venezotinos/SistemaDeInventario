@@ -26,10 +26,7 @@
                 @Html.DisplayNameFor(model => model.ExpirationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuyDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellDate)
+                @Html.DisplayNameFor(model => model.Category)
             </th>
             <th></th>
         </tr>
@@ -50,10 +47,7 @@
                 @Html.DisplayFor(modelItem => item.ExpirationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BuyDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellDate)
+                @Html.DisplayFor(modelItem => item.Category.ID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

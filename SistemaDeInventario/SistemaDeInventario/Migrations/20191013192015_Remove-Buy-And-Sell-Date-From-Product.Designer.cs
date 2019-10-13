@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaDeInventario.Data;
 
 namespace SistemaDeInventario.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191013192015_Remove-Buy-And-Sell-Date-From-Product")]
+    partial class RemoveBuyAndSellDateFromProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,8 +205,6 @@ namespace SistemaDeInventario.Migrations
 
                     b.Property<double>("BuyPrice");
 
-                    b.Property<int>("CategoryID");
-
                     b.Property<DateTime>("ExpirationDate");
 
                     b.Property<string>("Name");
@@ -213,9 +213,20 @@ namespace SistemaDeInventario.Migrations
 
                     b.HasKey("ID");
 
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("SistemaDeInventario.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("ProductID");
+
+                    b.Property<int>("CategoryID");
+
+                    b.HasKey("ProductID", "CategoryID");
+
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Products");
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -263,11 +274,16 @@ namespace SistemaDeInventario.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SistemaDeInventario.Models.Product", b =>
+            modelBuilder.Entity("SistemaDeInventario.Models.ProductCategory", b =>
                 {
                     b.HasOne("SistemaDeInventario.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SistemaDeInventario.Models.Product", "Product")
+                        .WithMany("Categories")
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

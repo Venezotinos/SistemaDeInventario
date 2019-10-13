@@ -22,7 +22,8 @@ namespace SistemaDeInventario.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var applicationDbContext = _context.Products.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -34,6 +35,7 @@ namespace SistemaDeInventario.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (product == null)
             {
@@ -46,6 +48,7 @@ namespace SistemaDeInventario.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace SistemaDeInventario.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,BuyPrice,ExpirationDate,BuyDate,SellDate")] Product product)
+        public async Task<IActionResult> Create([Bind("ID,Name,Price,BuyPrice,ExpirationDate,CategoryID")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace SistemaDeInventario.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", product.CategoryID);
             return View(product);
         }
 
@@ -78,6 +82,7 @@ namespace SistemaDeInventario.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", product.CategoryID);
             return View(product);
         }
 
@@ -86,7 +91,7 @@ namespace SistemaDeInventario.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,BuyPrice,ExpirationDate,BuyDate,SellDate")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,BuyPrice,ExpirationDate,CategoryID")] Product product)
         {
             if (id != product.ID)
             {
@@ -113,6 +118,7 @@ namespace SistemaDeInventario.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", product.CategoryID);
             return View(product);
         }
 
@@ -125,6 +131,7 @@ namespace SistemaDeInventario.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (product == null)
             {
