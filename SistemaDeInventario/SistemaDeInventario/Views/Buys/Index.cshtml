@@ -10,6 +10,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div class="form-group">
+    <label asp-for="@Model.First().Product.Category.ID" class="control-label"></label>
+    <select asp-for="@Model.First().Product.Category.ID" class="form-control" asp-items="ViewBag.ProductID"></select>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -41,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Ammount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.ID)
+                @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
