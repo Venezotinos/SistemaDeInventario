@@ -82,7 +82,7 @@ namespace SistemaDeInventario.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", product.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name", product.CategoryID);
             return View(product);
         }
 
@@ -118,7 +118,7 @@ namespace SistemaDeInventario.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", product.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name", product.CategoryID);
             return View(product);
         }
 
