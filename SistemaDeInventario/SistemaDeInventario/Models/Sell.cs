@@ -13,7 +13,7 @@ namespace SistemaDeInventario.Models
 
         public int Quantity { get; set; }
 
-        public double Income { get { return Product.Price - Product.BuyPrice; } }
+        public double Income { get; set; }
 
         public int ProductID { get; set; }
 

@@ -48,7 +48,7 @@ namespace SistemaDeInventario.Controllers
         // GET: Sells/Create
         public IActionResult Create()
         {
-            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "ID");
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Name");
             return View();
         }
 
@@ -61,11 +61,17 @@ namespace SistemaDeInventario.Controllers
         {
             if (ModelState.IsValid)
             {
+                sell.SellDate = DateTime.Now;
+
+                var product = _context.Products.Find(sell.ProductID);
+                sell.Income = (product.Price - product.BuyPrice) * sell.Quantity;
+
                 _context.Add(sell);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "ID", sell.ProductID);
+
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Name", sell.ProductID);
             return View(sell);
         }
 
@@ -118,7 +124,7 @@ namespace SistemaDeInventario.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "ID", sell.ProductID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Name", sell.ProductID);
             return View(sell);
         }
 
