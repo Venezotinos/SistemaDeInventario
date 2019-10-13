@@ -33,7 +33,7 @@ namespace SistemaDeInventario.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var category = await _context.Categories.Include(p => p.Products)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (category == null)
             {
