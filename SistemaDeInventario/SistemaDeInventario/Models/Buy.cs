@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SistemaDeInventario.Models
+{
+    public class Buy
+    {
+        public int ID { get; set; }
+
+        public DateTime BuyDate { get; set; }
+
+        public int Quantity { get; set; }
+
+        public double Ammount { get { return Product.Price * Quantity; } }
+
+        public int ProductID { get; set; }
+
+        public Product Product { get; set; }
+    }
+}

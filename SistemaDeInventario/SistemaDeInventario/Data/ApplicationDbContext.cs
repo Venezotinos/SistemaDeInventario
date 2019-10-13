@@ -13,8 +13,11 @@ namespace SistemaDeInventario.Data
 
         public DbSet<Product> Products { get; set; }
 
-
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Buy> Buys { get; set; }
+
+        public DbSet<Sell> Sells { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
