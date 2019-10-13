@@ -20,9 +20,11 @@ namespace SistemaDeInventario.Controllers
         }
 
         // GET: Buys
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryID)
         {
-            var applicationDbContext = _context.Buys.Include(b => b.Product);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name");
+
+            var applicationDbContext = (categoryID == null) ? _context.Buys.Include(b => b.Product) : _context.Buys.Include(b => b.Product).Where(i => i.Product.Category.ID == categoryID);
             return View(await applicationDbContext.ToListAsync());
         }
 
