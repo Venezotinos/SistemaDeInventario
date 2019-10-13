@@ -12,7 +12,7 @@ namespace SistemaDeInventario.Models
 
         public string Name { get; set; }
 
-        public string Price { get; set; }
+        public double Price { get; set; }
 
         public double BuyPrice { get; set; }
 
@@ -21,5 +21,9 @@ namespace SistemaDeInventario.Models
         public int CategoryID { get; set; }
 
         public Category Category { get; set; }
+
+        public ICollection<Buy> Buys { get; set; }
+
+        public ICollection<Sell> Sells { get; set; }
     }
 }
