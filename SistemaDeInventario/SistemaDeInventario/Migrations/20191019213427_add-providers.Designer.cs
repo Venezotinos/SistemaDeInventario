@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaDeInventario.Data;
 
 namespace SistemaDeInventario.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191019213427_add-providers")]
+    partial class addproviders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,32 +182,6 @@ namespace SistemaDeInventario.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SistemaDeInventario.Models.Branch", b =>
-                {
-                    b.Property<int>("BranchID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("BranchID");
-
-                    b.ToTable("Branch");
-                });
-
-            modelBuilder.Entity("SistemaDeInventario.Models.BranchProduct", b =>
-                {
-                    b.Property<int>("BranchID");
-
-                    b.Property<int>("ProductID");
-
-                    b.HasKey("BranchID", "ProductID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("BranchProduct");
-                });
-
             modelBuilder.Entity("SistemaDeInventario.Models.Buy", b =>
                 {
                     b.Property<int>("ID")
@@ -242,19 +218,6 @@ namespace SistemaDeInventario.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("SistemaDeInventario.Models.CategoryProduct", b =>
-                {
-                    b.Property<int>("CategoryID");
-
-                    b.Property<int>("ProductID");
-
-                    b.HasKey("CategoryID", "ProductID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("CategoryProduct");
-                });
-
             modelBuilder.Entity("SistemaDeInventario.Models.Product", b =>
                 {
                     b.Property<int>("ID")
@@ -263,13 +226,21 @@ namespace SistemaDeInventario.Migrations
 
                     b.Property<double>("BuyPrice");
 
+                    b.Property<int>("CategoryID");
+
                     b.Property<DateTime>("ExpirationDate");
 
                     b.Property<string>("Name");
 
                     b.Property<double>("Price");
 
+                    b.Property<int?>("ProviderID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("ProviderID");
 
                     b.ToTable("Products");
                 });
@@ -287,19 +258,6 @@ namespace SistemaDeInventario.Migrations
                     b.HasKey("ProviderID");
 
                     b.ToTable("Providers");
-                });
-
-            modelBuilder.Entity("SistemaDeInventario.Models.ProviderProduct", b =>
-                {
-                    b.Property<int>("ProviderID");
-
-                    b.Property<int>("ProductID");
-
-                    b.HasKey("ProviderID", "ProductID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("ProviderProduct");
                 });
 
             modelBuilder.Entity("SistemaDeInventario.Models.Sell", b =>
@@ -368,19 +326,6 @@ namespace SistemaDeInventario.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SistemaDeInventario.Models.BranchProduct", b =>
-                {
-                    b.HasOne("SistemaDeInventario.Models.Branch", "Branch")
-                        .WithMany("Products")
-                        .HasForeignKey("BranchID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SistemaDeInventario.Models.Product", "Product")
-                        .WithMany("Branches")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
             modelBuilder.Entity("SistemaDeInventario.Models.Buy", b =>
                 {
                     b.HasOne("SistemaDeInventario.Models.Product", "Product")
@@ -389,30 +334,16 @@ namespace SistemaDeInventario.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SistemaDeInventario.Models.CategoryProduct", b =>
+            modelBuilder.Entity("SistemaDeInventario.Models.Product", b =>
                 {
                     b.HasOne("SistemaDeInventario.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SistemaDeInventario.Models.Product", "Product")
-                        .WithMany("Categories")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SistemaDeInventario.Models.ProviderProduct", b =>
-                {
-                    b.HasOne("SistemaDeInventario.Models.Product", "Product")
-                        .WithMany("Providers")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SistemaDeInventario.Models.Provider", "Provider")
                         .WithMany("Products")
-                        .HasForeignKey("ProviderID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ProviderID");
                 });
 
             modelBuilder.Entity("SistemaDeInventario.Models.Sell", b =>

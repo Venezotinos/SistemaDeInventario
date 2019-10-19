@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace SistemaDeInventario.Models
 {
-    public class Category
+    public class Provider
     {
-        public int ID { get; set; }
+        public int ProviderID { get; set; }
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string Phone { get; set; }
 
-        public ICollection<CategoryProduct> Products { get; set; }
+        public ICollection<ProviderProduct> Products { get; set; }
     }
 }
