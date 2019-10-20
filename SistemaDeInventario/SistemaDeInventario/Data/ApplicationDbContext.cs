@@ -72,5 +72,13 @@ namespace SistemaDeInventario.Data
                 .HasForeignKey(pp => pp.ProductID)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
         }
+
+        public DbSet<SistemaDeInventario.Models.Branch> Branch { get; set; }
+
+        public DbSet<SistemaDeInventario.Models.BranchProduct> BranchProduct { get; set; }
+
+        public DbSet<SistemaDeInventario.Models.CategoryProduct> CategoryProduct { get; set; }
+
+        public DbSet<SistemaDeInventario.Models.ProviderProduct> ProviderProduct { get; set; }
     }
 }
